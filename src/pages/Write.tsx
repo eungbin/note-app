@@ -14,6 +14,7 @@ export default function Write() {
       <span className='text-2xl font-bold mt-8'>New Note</span>
       <span className='mb-8 text-sm'>This page is for creating new note.</span>
       <input className='w-96 bg-gray-300 p-2 text-sm rounded-lg mb-4' placeholder='Title' />
+      <textarea className='w-96 bg-gray-300 p-2 text-sm rounded-lg mb-4' placeholder='content' rows={7} />
       <div className='flex justify-end w-full mt-4'>
         <Button text='Write' func={_writeNote} />
       </div>

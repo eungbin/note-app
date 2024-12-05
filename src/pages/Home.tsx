@@ -1,4 +1,4 @@
-import {  } from 'react';
+import { useEffect } from 'react';
 import Button from '../components/Button';
 import NoteItem from '../components/NoteItem';
 import useNoteStore from '../store/store';
@@ -11,6 +11,21 @@ export default function Home() {
   const _goWritePage = () => {
     navigate('/write');
   }
+
+  const _getNoteList = () => {
+    fetch('http://localhost:3000/note', {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+  }
+
+  useEffect(() => {
+    _getNoteList();
+  }, []);
 
   return (
     <section className='flex flex-col items-start'>
