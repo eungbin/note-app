@@ -21,3 +21,18 @@ body {
   place-items: center;
   min-height: 100vh;
 }
+
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #e5e7eb;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: ##d1d5db;
+  border-radius: 4px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #e5e7eb;
+}
