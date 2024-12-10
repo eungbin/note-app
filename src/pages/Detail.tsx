@@ -8,7 +8,7 @@ export default function Detail() {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
   const title = queryParams.get('title');
-  const content = queryParams.get('content');
+  const content = queryParams.get('content');    // (수정사항) zustand를 이용하는데 굳이 title과 content까지 받을 이유가 없음
   const updateTitle = useRef<HTMLInputElement>(null);
   const updateContent = useRef<HTMLTextAreaElement>(null);
 

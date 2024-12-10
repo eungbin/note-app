@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Button from '../components/Button';
 import NoteItem from '../components/NoteItem';
 import useNoteStore from '../store/store';
