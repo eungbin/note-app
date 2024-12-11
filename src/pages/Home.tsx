@@ -1,19 +1,23 @@
-import { useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Button from '../components/Button';
 import NoteItem from '../components/NoteItem';
 import useNoteStore from '../store/store';
 import { useNavigate } from "react-router-dom";
+import { INote } from '../store/types.ts';
 
 export default function Home() {
   const { notes, addNote, clearNotes } = useNoteStore();
   const navigate = useNavigate();
+  const [sortedNotes, setSortedNotes] = useState<INote[]>([]);
+  const [sortWord, setSortWord] = useState<string>('');
+  const sortInput = useRef<HTMLInputElement>(null);
 
   const _goWritePage = () => {
     navigate('/write');
   }
 
-  const _goDetailPage = (id:number, title:string, content:string) => {
-    navigate(`/detail?id=${id}&title=${title}&content=${content}`);
+  const _goDetailPage = (id:number) => {
+    navigate(`/detail?id=${id}`);
   }
 
   const _getDiffInSeconds = (date1: Date, date2: Date): number => {
@@ -40,17 +44,35 @@ export default function Home() {
     })
   }
 
+  const _sortNote = () => {
+    const sortedData: INote[] = notes.filter((v: INote) => {
+      if(v.title.includes(sortWord)) return v;
+    });
+
+    setSortedNotes([...sortedData]);
+  }
+
+  const _handleSearchInput = (e) => { setSortWord(e.target.value); }
+
   useEffect(() => {
     _getNoteList();
   }, []);
+  
+  useEffect(() => {
+    setSortedNotes([...notes]);
+  }, [notes]);
+
+  useEffect(() => {
+    _sortNote();
+  }, [sortWord]);
 
   return (
     <section className='flex flex-col items-start'>
       <span className='text-2xl font-bold mt-8'>Notes App</span>
       <span className='mb-8 text-sm'>My notes list page.</span>
-      <input className='w-96 bg-gray-300 p-2 text-sm rounded-lg mb-4' placeholder='Search' />
+      <input className='w-96 bg-gray-300 p-2 text-sm rounded-lg mb-4' placeholder='Search' ref={sortInput} onChange={(e) => _handleSearchInput(e)} />
       <section className='w-full flex flex-col gap-2 overflow-y-auto h-96 scrollbar'>
-        {notes?.map(v => (
+        {sortedNotes?.map(v => (
           <NoteItem key={v.id} title={v.title} editTime={v.writeTime} func={() => _goDetailPage(v.id, v.title, v.content)} />
         ))}
       </section>
