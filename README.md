@@ -7,4 +7,4 @@
 - react-router-dom
 
 ## Preview
-![GIFMaker_me](https://github.com/user-attachments/assets/17db7fb4-71d5-40d9-9601-4ca67dd4640c)
+![GIFMaker_me (2)](https://github.com/user-attachments/assets/d62847e6-4153-4ba2-b15d-5422931d6cf5)
